@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <script>
+        function toggleDropdown(id) {
+            const dropdown = document.getElementById(id);
+            dropdown.classList.toggle('hidden');
+            dropdown.classList.toggle('block');
+        }
+    </script>
+</head>
+
+<body class="font-sans">
+
+    <main class="grid grid-cols-10">
+        <!-- Sidebar -->
+        <section class="col-span-2 row-span-1 bg-[#03a0e7] text-white px-3 py-3">
+            <div class="text-xl font-semibold">
+                <span class="text-blue-500">elite</span><span class="text-gray-100">admin</span>
+            </div>
+        </section>
+
+        <!-- Header -->
+        <section class="flex justify-between col-span-8 col-start-3 bg-[#03a9f3] px-3 py-2 items-center">
+            <div>
+                <button>Menu Icon</button>
+            </div>
+            <div class="flex items-center gap-2">
+                <img src="" alt="avatar" class="w-6 h-6 rounded-full bg-gray-300">
+                <p class="text-white text-sm">Mark</p>
+                <button>Settings Icon</button>
+            </div>
+        </section>
+
+        <!-- Sidebar Menu -->
+        <section class="col-span-2 row-start-2 bg-white shadow-md p-3">
+            <!-- Dashboard Section -->
+            <div class="grid grid-cols-6 items-center gap-2 cursor-pointer"
+                onclick="toggleDropdown('dashboardDropdown')">
+                <div>
+                    <button>icon</button>
+                </div>
+                <div class="col-span-4 font-medium">Dashboard</div>
+                <div class="col-start-6">
+                    <button>arrow</button>
+                </div>
+            </div>
+            <div id="dashboardDropdown" class="hidden pl-8 mt-2 space-y-1">
+                <div class="py-1 hover:bg-gray-100 cursor-pointer">Minimal</div>
+                <div class="py-1 hover:bg-gray-100 cursor-pointer">Analytical</div>
+                <div class="py-1 hover:bg-gray-100 cursor-pointer">Demographical</div>
+                <div class="py-1 hover:bg-gray-100 cursor-pointer">Modern</div>
+            </div>
+
+            <!-- Apps Section -->
+            <div class="grid grid-cols-6 items-center gap-2 cursor-pointer mt-4"
+                onclick="toggleDropdown('appsDropdown')">
+                <div>
+                    <i>icon</i>
+                </div>
+                <div class="col-span-4 font-medium">Apps</div>
+                <div class="col-start-6">
+                    <butto>arrow</butto>
+                </div>
+            </div>
+            <div id="appsDropdown" class="hidden pl-8 mt-2 space-y-1">
+                <div class="py-1 hover:bg-gray-100 cursor-pointer">Calendar</div>
+                <div class="py-1 hover:bg-gray-100 cursor-pointer">Mail</div>
+                <div class="py-1 hover:bg-gray-100 cursor-pointer">Chat</div>
+            </div>
+        </section>
+
+        <!-- Main Content -->
+        <section class="col-span-8 col-start-3 row-start-2 min-h-screen bg-[#edf1f5]">
+            <!-- Top Bar -->
+            <div class="flex justify-between items-center bg-white p-3 rounded shadow-sm mb-4">
+                <div class="text-black text-sm font-medium">Dashboard</div>
+                <div class="flex items-center gap-3">
+                    <p class="text-xs text-gray-500">Home > Dashboard 1</p>
+                    <button class="bg-blue-500 text-white px-3 py-1 rounded text-sm flex items-center gap-1">
+                        <i>Add Icon</i> Create New
+                    </button>
+                </div>
+            </div>
+            <!-- Content Area -->
+            <div class="bg-white">
+
+            </div>
+        </section>
+    </main>
+
+</body>
+
+</html>

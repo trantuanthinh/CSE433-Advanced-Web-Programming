@@ -3,6 +3,7 @@ import CategoryTitle from "../shared/CategoryTitle";
 import ProductSide from "./ProductSide";
 
 export default function ProductSideBlock({title, products}: {title: string; products: ProductType[];}) {
+
     return (
         <div>
             <CategoryTitle title={title} />
