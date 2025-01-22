@@ -5,6 +5,7 @@ import {MdKeyboardArrowDown} from "react-icons/md";
 import AddCategory from "./AddCategory";
 import CategoryList from "./CategoryList";
 import EditCategory from "./EditCategory";
+import TodoList from "./TodoList";
 
 export default function Dashboard() {
     const [editingCategory, setEditingCategory] = useState<{id: number; name: string;} | null>(null);
@@ -15,7 +16,7 @@ export default function Dashboard() {
     };
 
     return (
-        <div>
+        <>
             <main className="grid grid-cols-10">
                 {/* Sidebar */}
                 <section className="col-span-2 bg-[#03a0e7] text-white px-4 py-4">
@@ -101,9 +102,11 @@ export default function Dashboard() {
                             </>
                         )}
                     </section>
-                    {/* Add your main content here */}
                 </section>
             </main>
-        </div>
+            <section className="w-full">
+                <TodoList />
+            </section>
+        </>
     );
 }
