@@ -1,10 +1,12 @@
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {IoMdCreate, IoMdTrash} from "react-icons/io";
 import {fetchCategoryList} from "../../stimulate-api/stimulate-api";
 import {CategoryType} from "../../types/CategoryType";
+import EditCategory from "./EditCategory";
 
-const CategoryList: React.FC = () => {
+export default function CategoryList() {
     const [categories, setCategories] = useState<CategoryType[]>([]);
+    const [editingCategoryId, setEditingCategoryId] = useState<number | null>(null);
 
     useEffect(() => {
         fetchCategoryList().then((data) => setCategories(data));
@@ -14,6 +16,14 @@ const CategoryList: React.FC = () => {
         const filteredCategories = categories.filter((category) => category.id !== id);
         setCategories(filteredCategories);
         alert(`Category with ID ${id} deleted.`);
+    };
+
+    const handleEdit = (id: number) => {
+        setEditingCategoryId(id);
+    };
+
+    const handleCloseEdit = () => {
+        setEditingCategoryId(null);
     };
 
     return (
@@ -35,7 +45,7 @@ const CategoryList: React.FC = () => {
                             <td className="p-2">
                                 <button
                                     className="text-blue-500 hover:underline mr-2"
-                                    onClick={() => alert(`Edit Category ID: ${category.id}`)}
+                                    onClick={() => handleEdit(category.id)}
                                 >
                                     <IoMdCreate />
                                 </button>
@@ -50,8 +60,15 @@ const CategoryList: React.FC = () => {
                     ))}
                 </tbody>
             </table>
+            {editingCategoryId !== null && (
+                <EditCategory
+                    id={editingCategoryId}
+                    name={categories.find(cat => cat.id === editingCategoryId)?.name || ""}
+                    onClose={handleCloseEdit}
+                    categories={categories}
+                    setCategories={setCategories}
+                />
+            )}
         </div>
     );
 };
-
-export default CategoryList;

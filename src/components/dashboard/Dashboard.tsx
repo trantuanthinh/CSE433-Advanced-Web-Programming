@@ -1,15 +1,11 @@
-import {useState} from "react";
 import {IoIosSettings, IoMdAdd} from "react-icons/io";
 import {IoAppsSharp, IoMenu, IoTimerOutline} from "react-icons/io5";
 import {MdKeyboardArrowDown} from "react-icons/md";
 import AddCategory from "./AddCategory";
 import CategoryList from "./CategoryList";
-import EditCategory from "./EditCategory";
 import TodoList from "./TodoList";
 
 export default function Dashboard() {
-    const [editingCategory, setEditingCategory] = useState<{id: number; name: string;} | null>(null);
-
     const toggleDropdown = (id: string) => {
         const dropdown = document.getElementById(id);
         dropdown?.classList.toggle("hidden");
@@ -89,18 +85,8 @@ export default function Dashboard() {
                         </div>
                     </div>
                     <section className="col-span-8 col-start-3 bg-[#edf1f5] min-h-screen p-4">
-                        {editingCategory ? (
-                            <EditCategory
-                                id={editingCategory.id}
-                                path="#"
-                                name={editingCategory.name}
-                            />
-                        ) : (
-                            <>
-                                <AddCategory />
-                                <CategoryList />
-                            </>
-                        )}
+                        <AddCategory />
+                        <CategoryList />
                     </section>
                 </section>
             </main>

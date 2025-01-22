@@ -2,8 +2,8 @@ import React, {useReducer} from "react";
 import {TodoType} from "../../types/TodoType";
 
 type TodoAction =
-    | {type: "ADD_TODO"; text: string;}
-    | {type: "TOGGLE_TODO"; id: number;}
+    | {type: "ADD_TODO"; text: string; completed: boolean;}
+    | {type: "TOGGLE_TODO"; id: number; completed: boolean;}
     | {type: "DELETE_TODO"; id: number;};
 
 const todoReducer = (state: TodoType[], action: TodoAction) => {
@@ -26,7 +26,7 @@ export default function TodoList() {
         event.preventDefault();
         const text = (event.currentTarget.elements.namedItem("new-todo") as HTMLInputElement).value.trim();
         if (text) {
-            dispatch({type: "ADD_TODO", text});
+            dispatch({type: "ADD_TODO", text, completed: false});
             event.currentTarget.reset(); // Clear input field
         }
     };
@@ -51,7 +51,7 @@ export default function TodoList() {
                         <input
                             type="checkbox"
                             checked={todo.completed}
-                            onChange={() => dispatch({type: "TOGGLE_TODO", id: todo.id})}
+                            onChange={() => dispatch({type: "TOGGLE_TODO", id: todo.id, completed: !todo.completed})}
                             className="mr-2"
                         />
                         <span className={todo.completed ? "line-through" : ""}>{todo.text}</span>
