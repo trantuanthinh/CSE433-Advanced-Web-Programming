@@ -1,16 +1,18 @@
 import './App.css';
-import CarouselBanner from './components/layouts/CarouselBanner';
-import MainLayout from './components/layouts/main-layout/MainLayout';
+import Dashboard from './components/dashboard/Dashboard';
 
 function App() {
 
     return (
         <main className='px-10'>
-            <section>
+            {/* <section>
                 <CarouselBanner />
             </section>
             <section>
                 <MainLayout />
+            </section> */}
+            <section>
+                <Dashboard />
             </section>
         </main>
     );
