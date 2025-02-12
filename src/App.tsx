@@ -1,5 +1,6 @@
 import './App.css';
 import Cart from './components/cart/cart';
+import SearchBox from './components/shared/SearchBox';
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
                 <TodoList />
             </section> */}
             <section><Cart /></section>
+            <section><SearchBox /></section>
         </main>
     );
 }
