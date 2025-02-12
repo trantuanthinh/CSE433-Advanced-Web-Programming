@@ -4,3 +4,11 @@ export const formatDate = (date: Date) => {
     const year = date.getFullYear();
     return `${day}.${month}.${year}`;
 };
+
+export const formatUSCurrency = (amount: number) => {
+    return new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+        minimumFractionDigits: 2,
+    }).format(amount);
+};

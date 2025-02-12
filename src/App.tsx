@@ -1,5 +1,5 @@
 import './App.css';
-import TodoList from './components/dashboard/TodoList';
+import Cart from './components/cart/cart';
 
 function App() {
 
@@ -13,10 +13,11 @@ function App() {
             </section> 
             <section>
                 <Dashboard />
-            </section>*/}
+            </section>
             <section>
                 <TodoList />
-            </section>
+            </section> */}
+            <section><Cart /></section>
         </main>
     );
 }
