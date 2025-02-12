@@ -1,5 +1,7 @@
 export type TodoType = {
     id: number;
-    text: string;
+    title: string;
+    member: string;
+    date: Date;
     completed: boolean;
 };

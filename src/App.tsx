@@ -1,5 +1,5 @@
 import './App.css';
-import Dashboard from './components/dashboard/Dashboard';
+import TodoList from './components/dashboard/TodoList';
 
 function App() {
 
@@ -10,9 +10,12 @@ function App() {
             </section>
             <section>
                 <MainLayout />
-            </section> */}
+            </section> 
             <section>
                 <Dashboard />
+            </section>*/}
+            <section>
+                <TodoList />
             </section>
         </main>
     );
