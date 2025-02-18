@@ -12,7 +12,7 @@ export default function SearchBox() {
 
     return (
         <div className="p-6">
-            <form className="mt-4 flex items-center space-x-2 border p-2">
+            <form className="mt-4 flex items-center space-x-2">
                 <input
                     ref={searchRef}
                     type="text"

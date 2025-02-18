@@ -1,6 +1,8 @@
 import './App.css';
-import Cart from './components/cart/cart';
+import Cart from './components/cart/Cart';
+import TodoList from './components/dashboard/TodoList';
 import SearchBox from './components/shared/SearchBox';
+import FilterUser from './components/users/filterUser';
 
 function App() {
 
@@ -11,15 +13,22 @@ function App() {
             </section>
             <section>
                 <MainLayout />
-            </section> 
+            </section>
             <section>
                 <Dashboard />
+            </section> */}
+            <section>
+                <FilterUser />
             </section>
             <section>
                 <TodoList />
-            </section> */}
-            <section><Cart /></section>
-            <section><SearchBox /></section>
+            </section>
+            <section>
+                <Cart />
+            </section>
+            <section>
+                <SearchBox />
+            </section>
         </main>
     );
 }

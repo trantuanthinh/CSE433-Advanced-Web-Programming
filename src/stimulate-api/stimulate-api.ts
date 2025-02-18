@@ -1,5 +1,6 @@
 import {CategoryType} from "../types/CategoryType";
 import {ProductType} from "../types/ProductType";
+import {UserType} from "../types/UserType";
 
 export const fetchProductList = async (): Promise<ProductType[]> => {
     return new Promise((resolve) => {
@@ -74,7 +75,6 @@ export const fetchProductList = async (): Promise<ProductType[]> => {
     });
 };
 
-
 export const fetchCategoryList = async (): Promise<CategoryType[]> => {
     return new Promise((resolve) => {
         setTimeout(() => {
@@ -89,6 +89,18 @@ export const fetchCategoryList = async (): Promise<CategoryType[]> => {
                 {id: 8, path: "categories", name: "thể loại"},
                 {id: 9, path: "gifts", name: "quà tặng"},
             ]);
+        }, 2000); // Simulate network latency
+    });
+};
+
+export const fetchUserList = async (): Promise<UserType[]> => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            const userList: UserType[] = Array.from({length: 10000}, (_, index) => ({
+                id: index + 1,
+                name: `User ${index + 1}`,
+            }));
+            resolve(userList);
         }, 2000); // Simulate network latency
     });
 };
