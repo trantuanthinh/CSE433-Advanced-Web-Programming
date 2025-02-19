@@ -1,5 +1,5 @@
 import {CategoryType} from "../types/CategoryType";
-import {ProductType} from "../types/ProductType";
+import {ProductGridType, ProductType} from "../types/ProductType";
 import {UserType} from "../types/UserType";
 
 export const fetchProductList = async (): Promise<ProductType[]> => {
@@ -101,6 +101,22 @@ export const fetchUserList = async (): Promise<UserType[]> => {
                 name: `User ${index + 1}`,
             }));
             resolve(userList);
+        }, 2000); // Simulate network latency
+    });
+};
+
+export const fetchGridProductList = async (): Promise<ProductGridType[]> => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            const productList: ProductGridType[] = Array.from({length: 10}, (_, index) => ({
+                id: index + 1,
+                title: `Title ${index + 1}`,
+                image: "/flower.jpg",
+                price: (index + 1) * 1000,
+                quantity: `${index + 10}`,
+                category: `Category ${index + 1}`,
+            }));
+            resolve(productList);
         }, 2000); // Simulate network latency
     });
 };

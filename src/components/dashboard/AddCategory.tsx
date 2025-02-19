@@ -1,14 +1,15 @@
 import {useState} from "react";
+import {toast} from "react-toastify";
 
 export default function AddCategory() {
     const [name, setName] = useState("");
 
     const handleAddCategory = () => {
         if (!name.trim()) {
-            alert("Category name is required.");
+            toast.error("Category name is required.");
             return;
         }
-        alert(`Category "${name}" added!`);
+        toast.success(`Category "${name}" added!`);
         setName("");
     };
 

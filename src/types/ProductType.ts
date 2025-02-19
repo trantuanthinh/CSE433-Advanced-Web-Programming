@@ -6,3 +6,12 @@ export type ProductType = {
     image: string;
     code: string;
 };
+
+export type ProductGridType = {
+    id: number;
+    title: string;
+    image?: string;
+    price: number;
+    quantity: string;
+    category: string;
+};

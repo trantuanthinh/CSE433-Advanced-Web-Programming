@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import {IoMdCreate, IoMdTrash} from "react-icons/io";
+import {toast} from "react-toastify";
 import {fetchCategoryList} from "../../stimulate-api/stimulate-api";
 import {CategoryType} from "../../types/CategoryType";
 import EditCategory from "./EditCategory";
@@ -15,7 +16,7 @@ export default function CategoryList() {
     const handleDelete = (id: number) => {
         const filteredCategories = categories.filter((category) => category.id !== id);
         setCategories(filteredCategories);
-        alert(`Category with ID ${id} deleted.`);
+        toast.success(`Category with ID ${id} deleted.`);
     };
 
     const handleEdit = (id: number) => {
@@ -45,14 +46,10 @@ export default function CategoryList() {
                             <td className="p-2">
                                 <button
                                     className="text-blue-500 hover:underline mr-2"
-                                    onClick={() => handleEdit(category.id)}
-                                >
+                                    onClick={() => handleEdit(category.id)}>
                                     <IoMdCreate />
                                 </button>
-                                <button
-                                    className="text-red-500 hover:underline"
-                                    onClick={() => handleDelete(category.id)}
-                                >
+                                <button className="text-red-500 hover:underline" onClick={() => handleDelete(category.id)}>
                                     <IoMdTrash />
                                 </button>
                             </td>
@@ -63,7 +60,7 @@ export default function CategoryList() {
             {editingCategoryId !== null && (
                 <EditCategory
                     id={editingCategoryId}
-                    name={categories.find(cat => cat.id === editingCategoryId)?.name || ""}
+                    name={categories.find((cat) => cat.id === editingCategoryId)?.name || ""}
                     onClose={handleCloseEdit}
                     categories={categories}
                     setCategories={setCategories}
@@ -71,4 +68,4 @@ export default function CategoryList() {
             )}
         </div>
     );
-};
+}

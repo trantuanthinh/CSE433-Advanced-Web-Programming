@@ -1,35 +1,31 @@
-import './App.css';
-import Cart from './components/cart/Cart';
-import TodoList from './components/dashboard/TodoList';
-import SearchBox from './components/shared/SearchBox';
-import FilterUser from './components/users/filterUser';
+import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import MUIDataGrid from "./components/MUIDataGrid";
+import Dashboard from "./components/dashboard/Dashboard";
+import Layout from "./components/layouts/Layout";
+import MainLayout from "./components/layouts/main-layout/MainLayout";
+
+const router = createBrowserRouter([
+    {
+        path: "/",
+        element: <Layout />,
+        children: [
+            {path: "products", element: <MainLayout />},
+            {path: "news", element: <MUIDataGrid />},
+            {
+                path: "admin",
+                element: <Dashboard />,
+                children: [
+                    {path: "categories", element: <MUIDataGrid />},
+                    {path: "products", element: <MUIDataGrid />},
+                ],
+            },
+        ],
+    },
+]);
 
 function App() {
-
     return (
-        <main className='px-10'>
-            {/* <section>
-                <CarouselBanner />
-            </section>
-            <section>
-                <MainLayout />
-            </section>
-            <section>
-                <Dashboard />
-            </section> */}
-            <section>
-                <FilterUser />
-            </section>
-            <section>
-                <TodoList />
-            </section>
-            <section>
-                <Cart />
-            </section>
-            <section>
-                <SearchBox />
-            </section>
-        </main>
+        <RouterProvider router={router} />
     );
 }
 
