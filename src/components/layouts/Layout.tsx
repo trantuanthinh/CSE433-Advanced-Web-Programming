@@ -7,7 +7,9 @@ export default function Layout() {
     return (
         <>
             <Header />
-            <Outlet />
+            <div className="mx-10">
+                <Outlet />
+            </div>
             <ToastContainer position="bottom-left" autoClose={2000} pauseOnHover theme="colored" />
             <Footer />
         </>

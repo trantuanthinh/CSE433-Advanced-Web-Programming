@@ -1,11 +1,12 @@
 import {FaShoppingCart} from "react-icons/fa";
+import SearchBox from "../shared/SearchBox";
 
 export default function Banner() {
     return (
         <>
             <div className="flex flex-row px-40 justify-between items-center">
                 <img src="/logos/logo.png" alt="Logo" />
-                <input type="text" className="h-10 px-4 rounded-md border-2" placeholder="Tìm kiếm..." />
+                <SearchBox />
                 <div className="grid grid-cols-2 grid-rows-2">
                     <div className="row-span-2 flex justify-center items-center">
                         <button className="bg-red-500 rounded-full h-10 w-10 flex justify-center items-center">

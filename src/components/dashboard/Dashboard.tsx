@@ -1,6 +1,7 @@
 import {IoIosSettings, IoMdAdd} from "react-icons/io";
 import {IoAppsSharp, IoMenu, IoTimerOutline} from "react-icons/io5";
 import {MdKeyboardArrowDown} from "react-icons/md";
+import {Outlet} from "react-router-dom";
 import AddCategory from "./AddCategory";
 import CategoryList from "./CategoryList";
 import TodoList from "./TodoList";
@@ -92,6 +93,9 @@ export default function Dashboard() {
             </main>
             <section className="w-full">
                 <TodoList />
+            </section>
+            <section>
+                <Outlet></Outlet>
             </section>
         </>
     );

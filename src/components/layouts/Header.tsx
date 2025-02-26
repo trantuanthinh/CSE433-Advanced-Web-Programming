@@ -1,3 +1,4 @@
+import {Link} from "react-router-dom";
 import Banner from "./Banner";
 import NavBar from "./NavBar";
 
@@ -6,13 +7,23 @@ export default function Header() {
         <>
             <div className="p-4 grid grid-cols-3 grid-rows-1 bg-[#2c3e50] text-white gap-4">
                 <div>
-                    <p>Hotline: <span className="font-bold">0968 159 239 - 08.38 409 098</span></p>
+                    <p>
+                        Hotline: <span className="font-bold">0968 159 239 - 08.38 409 098</span>
+                    </p>
                 </div>
                 <div>
-                    <p>Địa chỉ: <span className="font-bold">01 Nguyễn Cửu Vân, Bình Thạnh, TP.HCM </span></p>
+                    <p>
+                        Địa chỉ: <span className="font-bold">01 Nguyễn Cửu Vân, Bình Thạnh, TP.HCM </span>
+                    </p>
                 </div>
                 <div>
-                    <p><span className="font-bold">Đăng nhập</span> hoặc <span className="font-bold">Tạo tài khoản mới</span></p>
+                    <Link to="/sign-in">
+                        <span className="font-bold">Đăng nhập</span>
+                    </Link>
+                    hoặc
+                    <Link to="/sign-up">
+                        <span className="font-bold">Tạo tài khoản mới</span>
+                    </Link>
                 </div>
             </div>
             <Banner />
