@@ -3,6 +3,7 @@ import {IoAppsSharp, IoMenu, IoTimerOutline} from "react-icons/io5";
 import {MdKeyboardArrowDown} from "react-icons/md";
 import {Outlet} from "react-router-dom";
 import AddCategory from "./AddCategory";
+import AddProduct from "./AddProduct";
 import CategoryList from "./CategoryList";
 import TodoList from "./TodoList";
 
@@ -88,6 +89,9 @@ export default function Dashboard() {
                     <section className="col-span-8 col-start-3 bg-[#edf1f5] min-h-screen p-4">
                         <AddCategory />
                         <CategoryList />
+                    </section>
+                    <section className="col-span-8 col-start-3 bg-[#edf1f5] min-h-screen p-4">
+                        <AddProduct />
                     </section>
                 </section>
             </main>

@@ -1,5 +1,6 @@
 import {useForm} from "react-hook-form";
 import {Link} from "react-router-dom";
+import {useMyContext} from "../../../Context";
 import CategoryTitle from "../../shared/CategoryTitle";
 
 type SignInFormInputs = {
@@ -8,6 +9,8 @@ type SignInFormInputs = {
 };
 
 export default function SignIn() {
+    const {state: {user}, dispatch} = useMyContext();
+
     const {
         register,
         handleSubmit,
@@ -15,7 +18,17 @@ export default function SignIn() {
     } = useForm<SignInFormInputs>({mode: "onBlur"});
 
     const onSubmit = async (data: SignInFormInputs) => {
-        console.log("Form Data:", data);
+        try {
+            dispatch({type: "SIGN-IN", payload: {id: 1, email: data.email, name: "Admin", role: "admin"}});
+            console.log("Form Data:", data);
+        } catch (error) {
+            console.error("Error during sign-in:", error);
+        }
+    };
+
+    const handleClick = () => {
+        console.log(user);
+
     };
 
     return (
@@ -29,44 +42,43 @@ export default function SignIn() {
                     </p>
                 </div>
 
-                <div>
-                    <form noValidate onSubmit={handleSubmit(onSubmit)} className="flex flex-col space-y-4">
-                        <div className="mb-4">
-                            <label className="block font-medium">Email</label>
-                            <input
-                                type="email"
-                                className="w-full p-2 border rounded mt-1"
-                                {...register("email", {
-                                    required: "Email là bắt buộc",
-                                })}
-                            />
-                            {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
-                        </div>
-                        <div className="mb-4">
-                            <label className="block font-medium">Password</label>
-                            <input
-                                type="password"
-                                className="w-full p-2 border rounded mt-1"
-                                {...register("password", {
-                                    required: "Mật khẩu là bắt buộc",
-                                })}
-                            />
-                            {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
-                        </div>
+                <form noValidate onSubmit={handleSubmit(onSubmit)} className="flex flex-col space-y-4">
+                    <div className="mb-4">
+                        <label className="block font-medium">Email</label>
+                        <input
+                            type="email"
+                            className="w-full p-2 border rounded mt-1"
+                            {...register("email", {
+                                required: "Email là bắt buộc",
+                            })}
+                        />
+                        {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
+                    </div>
+                    <div className="mb-4">
+                        <label className="block font-medium">Password</label>
+                        <input
+                            type="password"
+                            className="w-full p-2 border rounded mt-1"
+                            {...register("password", {
+                                required: "Mật khẩu là bắt buộc",
+                            })}
+                        />
+                        {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
+                    </div>
 
-                        <div className="flex justify-between items-center text-sm">
-                            <Link to="/forgot-password" className="text-[#662d91] hover:underline">
-                                Quên mật khẩu?
-                            </Link>
-                            <button
-                                type="submit"
-                                className="w-sm bg-[#662d91] text-white p-2 rounded disabled:opacity-50"
-                                disabled={isSubmitting}>
-                                {isSubmitting ? "Signing In..." : "Sign In"}
-                            </button>
-                        </div>
-                    </form>
-                </div>
+                    <div className="flex justify-between items-center text-sm">
+                        <Link to="/forgot-password" className="text-[#662d91] hover:underline">
+                            Quên mật khẩu?
+                        </Link>
+                        <button
+                            type="submit"
+                            className="w-sm bg-[#662d91] text-white p-2 rounded disabled:opacity-50"
+                            disabled={isSubmitting}>
+                            {isSubmitting ? "Signing In..." : "Sign In"}
+                        </button>
+                    </div>
+                </form>
+                <button onClick={handleClick}>sss</button>
             </div>
         </div>
     );
