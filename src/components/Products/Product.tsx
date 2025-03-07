@@ -1,4 +1,5 @@
 import {ProductType} from "../../types/ProductType";
+import AddToCart from "../cart/AddToCart";
 
 export default function Product({id, name, price, discount, image, code}: ProductType) {
     return (
@@ -21,6 +22,7 @@ export default function Product({id, name, price, discount, image, code}: Produc
             ) : (
                 <p className="font-bold text-xl text-[#e83b29]">{price.toLocaleString()}đ</p>
             )}
+            <AddToCart {...{id, name, price, discount, image, code}} />
         </div>
     );
 }

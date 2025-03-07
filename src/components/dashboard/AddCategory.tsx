@@ -1,3 +1,4 @@
+import axios from "axios";
 import {useForm} from "react-hook-form";
 import {CategoryType} from "../../types/CategoryType";
 
@@ -9,7 +10,19 @@ export default function AddCategory() {
     } = useForm<CategoryType>({mode: "onBlur"});
 
     const onSubmit = async (data: CategoryType) => {
-        console.log("Form Data:", data);
+        try {
+            const res = await axios.post(import.meta.env.VITE_APP_API_URL + "/ProductCategories", data, {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+
+            if (res.data.ok) {
+                console.log("Category added successfully");
+            }
+        } catch (error) {
+            console.log("Error adding category:", error);
+        }
     };
 
     return (
@@ -31,3 +44,4 @@ export default function AddCategory() {
         </div>
     );
 }
+

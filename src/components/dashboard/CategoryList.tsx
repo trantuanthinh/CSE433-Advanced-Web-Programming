@@ -1,7 +1,7 @@
+import axios from "axios";
 import {useEffect, useState} from "react";
 import {IoMdCreate, IoMdTrash} from "react-icons/io";
-import {toast} from "react-toastify";
-import {fetchCategoryList} from "../../stimulate-api/stimulate-api";
+import {toast, ToastContainer} from "react-toastify";
 import {CategoryType} from "../../types/CategoryType";
 import EditCategory from "./EditCategory";
 
@@ -10,13 +10,27 @@ export default function CategoryList() {
     const [editingCategoryId, setEditingCategoryId] = useState<number | null>(null);
 
     useEffect(() => {
-        fetchCategoryList().then((data) => setCategories(data));
+        getCategories();
     }, []);
 
+    const getCategories = async () => {
+        try {
+            const response = await axios.get(`${import.meta.env.VITE_APP_API_URL}/ProductCategories`);
+            setCategories(response.data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     const handleDelete = (id: number) => {
-        const filteredCategories = categories.filter((category) => category.id !== id);
-        setCategories(filteredCategories);
-        toast.success(`Category with ID ${id} deleted.`);
+        const confirmDelete = window.confirm(`Are you sure you want to delete category with ID ${id}?`);
+        if (confirmDelete) {
+            axios
+                .delete(`${import.meta.env.VITE_APP_API_URL}/ProductCategories/${id}`)
+                .catch((error) => console.error(error));
+            getCategories();
+            toast.success(`Category with ID ${id} deleted.`);
+        }
     };
 
     const handleEdit = (id: number) => {
@@ -30,7 +44,7 @@ export default function CategoryList() {
     return (
         <div className="p-4 bg-white rounded shadow">
             <h2 className="text-lg font-semibold mb-4">Categories</h2>
-            <table className="table-auto w-full text-left border-collapse">
+            <table className="table-auto w-full text-left">
                 <thead>
                     <tr className="border-b">
                         <th className="p-2">#</th>
@@ -66,6 +80,7 @@ export default function CategoryList() {
                     setCategories={setCategories}
                 />
             )}
+            <ToastContainer />
         </div>
     );
 }

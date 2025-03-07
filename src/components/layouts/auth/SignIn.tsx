@@ -19,16 +19,16 @@ export default function SignIn() {
 
     const onSubmit = async (data: SignInFormInputs) => {
         try {
-            dispatch({type: "SIGN-IN", payload: {id: 1, email: data.email, name: "Admin", role: "admin"}});
-            console.log("Form Data:", data);
+            const res = await fetch(`${import.meta.env.VITE_APP_API_URL}/Users?email=${data.email}&password=${data.password}`);
+            const userData = await res.json();
+            if (userData.length) {
+                dispatch({type: "SIGN-IN", payload: userData[0]});
+            } else {
+                console.log("User doesn't exist");
+            }
         } catch (error) {
-            console.error("Error during sign-in:", error);
+            console.error("Failed to fetch users:", error);
         }
-    };
-
-    const handleClick = () => {
-        console.log(user);
-
     };
 
     return (
@@ -78,8 +78,8 @@ export default function SignIn() {
                         </button>
                     </div>
                 </form>
-                <button onClick={handleClick}>sss</button>
             </div>
         </div>
     );
 }
+

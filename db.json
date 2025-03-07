@@ -1,0 +1,77 @@
+{
+  "Users": [
+    {
+      "id": "1",
+      "email": "admin@gmail.com",
+      "password": "123456",
+      "name": "Admin User",
+      "role": "admin"
+    },
+    {
+      "id": "2",
+      "email": "user@example.com",
+      "password": "password123",
+      "name": "Regular User",
+      "role": "buyer"
+    }
+  ],
+  "ProductCategories": [
+    {
+      "id": "2",
+      "name": "Hoa Ly",
+      "description": "Loài hoa thanh lịch, biểu tượng của sự thuần khiết và sang trọng."
+    },
+    {
+      "id": "11",
+      "name": "aa",
+      "path": "11"
+    }
+  ],
+  "Products": [
+    {
+      "id": "1",
+      "name": "Hoa Hồng Đỏ",
+      "price": 15.99,
+      "discount": 10,
+      "image": "https://example.com/images/red_rose.jpg",
+      "code": "HH001",
+      "category_id": "1"
+    },
+    {
+      "id": "2",
+      "name": "Hoa Hồng Trắng",
+      "price": 17.5,
+      "discount": 5,
+      "image": "https://example.com/images/white_rose.jpg",
+      "code": "HH002",
+      "category_id": "1"
+    },
+    {
+      "id": "3",
+      "name": "Hoa Ly Hồng",
+      "price": 20,
+      "discount": 0,
+      "image": "https://example.com/images/pink_lily.jpg",
+      "code": "HL001",
+      "category_id": "2"
+    },
+    {
+      "id": "4",
+      "name": "Hoa Ly Vàng",
+      "price": 22,
+      "discount": 5,
+      "image": "https://example.com/images/yellow_lily.jpg",
+      "code": "HL002",
+      "category_id": "2"
+    },
+    {
+      "id": "5",
+      "name": "Hoa Cúc Họa Mi",
+      "price": 10.99,
+      "discount": 0,
+      "image": "https://example.com/images/chrysanthemum.jpg",
+      "code": "HC001",
+      "category_id": "3"
+    }
+  ]
+}
