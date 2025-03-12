@@ -15,7 +15,9 @@ const Search = lazy(() => import("./components/search/Search"));
 const Shipping = lazy(() => import("./components/shipping/Shipping"));
 
 const AdminRoute = ({element}: {element: JSX.Element;}) => {
-    const {state: {user}} = useMyContext();
+    const {
+        state: {user},
+    } = useMyContext();
 
     if (!user) {
         console.warn("User is not logged in. Redirecting to sign-in.");
@@ -39,7 +41,6 @@ const router = createBrowserRouter([
             {path: "sign-in", element: <SignIn />},
             {path: "sign-up", element: <SignUp />},
             {path: "cart", element: <Cart />},
-            {path: "shipping", element: <Shipping />},
             {path: "search/:query", element: <Search />},
             {path: "products", element: <MainLayout />},
             {path: "news", element: <MUIDataGrid />},
@@ -51,6 +52,7 @@ const router = createBrowserRouter([
         children: [
             {path: "categories", element: <CategoryManagement />},
             {path: "products", element: <ProductManagement />},
+            {path: "shipping", element: <Shipping />},
         ],
     },
 ]);

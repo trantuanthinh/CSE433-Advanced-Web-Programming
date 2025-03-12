@@ -4,6 +4,7 @@ import {useForm} from "react-hook-form";
 import {toast} from "react-toastify";
 
 type OrderType = {
+    id: number; // Ensure id is included
     recipientName: string;
     phoneNumber: string;
     address: string;
@@ -17,7 +18,8 @@ export default function Shipping() {
         formState: {errors, isSubmitting},
         reset,
     } = useForm<OrderType>({mode: "onBlur"});
-    const [orders, setOrders] = useState<OrderType | null>(null);
+
+    const [orders, setOrders] = useState<OrderType[]>([]);
 
     useEffect(() => {
         getOrders();
@@ -25,30 +27,31 @@ export default function Shipping() {
 
     const getOrders = async () => {
         try {
-            const response = await fetch(`${import.meta.env.VITE_APP_API_URL}/Orders`);
-            const data = await response.json();
-            setOrders(data);
+            const response = await axios.get(`${import.meta.env.VITE_APP_API_URL}/Orders`);
+            setOrders(response.data);
         } catch (error) {
-            console.log(error);
+            console.error("Error fetching orders:", error);
         }
     };
 
-    const onSubmit = async (data: OrderType) => {
+    const onSubmit = async (data: Omit<OrderType, "id">) => {
         try {
             const res = await axios.post(`${import.meta.env.VITE_APP_API_URL}/Orders`, data);
-            if (res.status == 201) {
-                toast.success("Done");
+            if (res.status === 201) {
+                toast.success("Order placed successfully!");
+                await getOrders();
+                reset();
             }
-            await getOrders();
-            reset();
         } catch (error) {
-            console.log(error);
+            console.error("Error submitting order:", error);
+            toast.error("Failed to place order. Please try again.");
         }
     };
 
     return (
         <div className="p-6 max-w-md mx-auto bg-white rounded shadow-lg">
             <h1 className="text-2xl font-semibold mb-4">Shipping</h1>
+
             <form className="flex flex-col gap-4" noValidate onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     <input
@@ -65,9 +68,7 @@ export default function Shipping() {
                         type="tel"
                         placeholder="Phone Number"
                         className="w-full p-2 border rounded"
-                        {...register("phoneNumber", {
-                            required: "Phone Number is required",
-                        })}
+                        {...register("phoneNumber", {required: "Phone Number is required"})}
                     />
                     {errors.phoneNumber && <p className="text-red-500 text-sm">{errors.phoneNumber.message}</p>}
                 </div>
@@ -94,22 +95,17 @@ export default function Shipping() {
                 </button>
             </form>
 
-            {/* Display order details (optional) */}
-            {orders && (
+            {orders.length > 0 && (
                 <div className="mt-6 p-4 bg-gray-100 rounded">
                     <h2 className="text-lg font-semibold">Order Summary</h2>
-                    <p>
-                        <strong>Name:</strong> {orders.recipientName}
-                    </p>
-                    <p>
-                        <strong>Phone:</strong> {orders.phoneNumber}
-                    </p>
-                    <p>
-                        <strong>Address:</strong> {orders.address}
-                    </p>
-                    <p>
-                        <strong>Note:</strong> {orders.note || "N/A"}
-                    </p>
+                    {orders.map((order) => (
+                        <div key={order.id} className="border-b last:border-0 pb-2 mb-2">
+                            <p>Name: {order.recipientName}</p>
+                            <p>Phone: {order.phoneNumber}</p>
+                            <p>Address: {order.address}</p>
+                            <p>Note: {order.note || "N/A"}</p>
+                        </div>
+                    ))}
                 </div>
             )}
         </div>

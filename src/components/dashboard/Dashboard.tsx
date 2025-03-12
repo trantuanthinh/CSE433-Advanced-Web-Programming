@@ -2,6 +2,7 @@ import {IoIosSettings} from "react-icons/io";
 import {IoMenu, IoTimerOutline} from "react-icons/io5";
 import {MdKeyboardArrowDown} from "react-icons/md";
 import {Link, Outlet} from "react-router-dom";
+import TodoList from "./TodoList";
 
 export default function Dashboard() {
     const toggleDropdown = (id: string) => {
@@ -53,6 +54,9 @@ export default function Dashboard() {
                         <Link to="/admin/products" className="py-1 hover:bg-gray-100 cursor-pointer">
                             Products
                         </Link>
+                        <Link to="/admin/shipping" className="py-1 hover:bg-gray-100 cursor-pointer">
+                            Shipping
+                        </Link>
                     </div>
                 </section>
 
@@ -61,9 +65,9 @@ export default function Dashboard() {
                     <Outlet />
                 </section>
             </main>
-            {/* <section className="w-full">
+            <section className="w-full">
                 <TodoList />
-            </section> */}
+            </section>
         </>
     );
 }

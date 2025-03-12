@@ -1,5 +1,6 @@
 import {useForm} from "react-hook-form";
 import {Link} from "react-router-dom";
+import {toast} from "react-toastify";
 import {useMyContext} from "../../../Context";
 import CategoryTitle from "../../shared/CategoryTitle";
 
@@ -9,7 +10,10 @@ type SignInFormInputs = {
 };
 
 export default function SignIn() {
-    const {state: {user}, dispatch} = useMyContext();
+    const {
+        state: {user},
+        dispatch,
+    } = useMyContext();
 
     const {
         register,
@@ -19,12 +23,15 @@ export default function SignIn() {
 
     const onSubmit = async (data: SignInFormInputs) => {
         try {
-            const res = await fetch(`${import.meta.env.VITE_APP_API_URL}/Users?email=${data.email}&password=${data.password}`);
+            const res = await fetch(
+                `${import.meta.env.VITE_APP_API_URL}/Users?email=${data.email}&password=${data.password}`
+            );
             const userData = await res.json();
             if (userData.length) {
                 dispatch({type: "SIGN-IN", payload: userData[0]});
+                toast.success("Success");
             } else {
-                console.log("User doesn't exist");
+                toast.error("User doesn't exist");
             }
         } catch (error) {
             console.error("Failed to fetch users:", error);
@@ -82,4 +89,3 @@ export default function SignIn() {
         </div>
     );
 }
-
