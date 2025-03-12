@@ -9,7 +9,7 @@ export default function AddCategory() {
         formState: {errors, isSubmitting},
     } = useForm<CategoryType>({mode: "onBlur"});
 
-    const onSubmit = async (data: CategoryType) => {
+    const onSubmit = async (data: Omit<CategoryType, "id">) => {
         try {
             const res = await axios.post(import.meta.env.VITE_APP_API_URL + "/ProductCategories", data, {
                 headers: {

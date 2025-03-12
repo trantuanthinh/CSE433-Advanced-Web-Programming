@@ -8,7 +8,7 @@ export default function AddProduct() {
         formState: {errors, isSubmitting},
     } = useForm<ProductType>({mode: "onBlur"});
 
-    const onSubmit = async (data: ProductType) => {
+    const onSubmit = async (data: Omit<ProductType, "id">) => {
         console.log("Form Data:", data);
     };
 
