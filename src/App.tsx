@@ -1,16 +1,18 @@
-import React from "react";
+import React, {lazy, Suspense} from "react";
 import {createBrowserRouter, Navigate, RouterProvider} from "react-router-dom";
 import {ContextProvider, useMyContext} from "./Context";
-import MUIDataGrid from "./components/MUIDataGrid";
-import CategoryManagement from "./components/admin/CategoryManagement";
-import ProductManagement from "./components/admin/ProductManagement";
-import Cart from "./components/cart/Cart";
-import Dashboard from "./components/dashboard/Dashboard";
-import Layout from "./components/layouts/Layout";
-import SignIn from "./components/layouts/auth/SignIn";
-import SignUp from "./components/layouts/auth/SignUp";
-import MainLayout from "./components/layouts/main-layout/MainLayout";
-import Search from "./components/search/Search";
+
+const MUIDataGrid = lazy(() => import("./components/MUIDataGrid"));
+const CategoryManagement = lazy(() => import("./components/admin/CategoryManagement"));
+const ProductManagement = lazy(() => import("./components/admin/ProductManagement"));
+const Cart = lazy(() => import("./components/cart/Cart"));
+const Dashboard = lazy(() => import("./components/dashboard/Dashboard"));
+const Layout = lazy(() => import("./components/layouts/Layout"));
+const SignIn = lazy(() => import("./components/layouts/auth/SignIn"));
+const SignUp = lazy(() => import("./components/layouts/auth/SignUp"));
+const MainLayout = lazy(() => import("./components/layouts/main-layout/MainLayout"));
+const Search = lazy(() => import("./components/search/Search"));
+const Shipping = lazy(() => import("./components/shipping/Shipping"));
 
 const AdminRoute = ({element}: {element: JSX.Element;}) => {
     const {state: {user}} = useMyContext();
@@ -28,16 +30,16 @@ const AdminRoute = ({element}: {element: JSX.Element;}) => {
     return element;
 };
 
-
 const router = createBrowserRouter([
     {
         path: "/",
         element: <Layout />,
         children: [
-            {path: "home", element: <MainLayout />},
+            {path: "", element: <MainLayout />},
             {path: "sign-in", element: <SignIn />},
             {path: "sign-up", element: <SignUp />},
             {path: "cart", element: <Cart />},
+            {path: "shipping", element: <Shipping />},
             {path: "search/:query", element: <Search />},
             {path: "products", element: <MainLayout />},
             {path: "news", element: <MUIDataGrid />},
@@ -57,7 +59,9 @@ function App() {
     return (
         <React.StrictMode>
             <ContextProvider>
-                <RouterProvider router={router} />;
+                <Suspense fallback={<div className="text-center p-5">Loading Page...</div>}>
+                    <RouterProvider router={router} />
+                </Suspense>
             </ContextProvider>
         </React.StrictMode>
     );
