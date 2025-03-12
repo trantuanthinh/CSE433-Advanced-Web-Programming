@@ -46,7 +46,7 @@ export default function Dashboard() {
                         </div>
                         <MdKeyboardArrowDown className="text-gray-600" />
                     </div>
-                    <div id="dashboardDropdown" className="flex flex-col hidden pl-6 mt-2 space-y-2">
+                    <div id="dashboardDropdown" className="flex flex-col pl-6 mt-2 space-y-2">
                         <Link to="/admin/categories" className="py-1 hover:bg-gray-100 cursor-pointer">
                             Categories
                         </Link>

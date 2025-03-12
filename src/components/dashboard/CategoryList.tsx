@@ -22,13 +22,13 @@ export default function CategoryList() {
         }
     };
 
-    const handleDelete = (id: number) => {
+    const handleDelete = async (id: number) => {
         const confirmDelete = window.confirm(`Are you sure you want to delete category with ID ${id}?`);
         if (confirmDelete) {
-            axios
+            await axios
                 .delete(`${import.meta.env.VITE_APP_API_URL}/ProductCategories/${id}`)
                 .catch((error) => console.error(error));
-            getCategories();
+            await getCategories();
             toast.success(`Category with ID ${id} deleted.`);
         }
     };
