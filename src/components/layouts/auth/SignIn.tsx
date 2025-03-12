@@ -10,10 +10,7 @@ type SignInFormInputs = {
 };
 
 export default function SignIn() {
-    const {
-        state: {user},
-        dispatch,
-    } = useMyContext();
+    const {dispatch} = useMyContext();
 
     const {
         register,

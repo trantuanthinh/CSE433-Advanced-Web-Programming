@@ -1,7 +1,8 @@
+import axios from "axios";
 import {useEffect, useState} from "react";
+import {toast} from "react-toastify";
 import {useMyContext} from "../../Context";
 import {formatUSCurrency} from "../../services/shared-service";
-import {fetchProductList} from "../../stimulate-api/stimulate-api";
 import {ProductType} from "../../types/ProductType";
 
 export default function Cart() {
@@ -13,14 +14,34 @@ export default function Cart() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const data = await fetchProductList();
-                setProducts(data);
+                const data = await axios.get(`${import.meta.env.VITE_APP_API_URL}/Porudcts`);
+                setProducts(data.data);
             } catch (error) {
                 console.error("Failed to fetch products:", error);
             }
         };
         fetchData();
     }, []);
+
+    const handleOrder = async () => {
+        try {
+            let data = state.cart;
+            const responses = await Promise.all(
+                data.map(async (item) => {
+                    let response = await axios.post(`${import.meta.env.VITE_APP_API_URL}/Orders`, item);
+                    return response.status;
+                })
+            );
+            if (responses.every(status => status == 201)) {
+                toast.success("Done");
+                dispatch({type: "CLEAR_CART"});
+            } else {
+                toast.error("Fail");
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     return (
         <div className="p-6">
@@ -76,6 +97,11 @@ export default function Cart() {
                                 className="bg-red-600 hover:bg-red-800 text-white px-3 py-1 rounded mt-2"
                                 onClick={() => dispatch({type: "CLEAR_CART"})}>
                                 Clear Cart
+                            </button>
+                            <button
+                                className="bg-red-600 hover:bg-red-800 text-white px-3 py-1 rounded mt-2"
+                                onClick={handleOrder}>
+                                Order
                             </button>
                         </>
                     )}

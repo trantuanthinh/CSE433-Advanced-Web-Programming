@@ -79,24 +79,6 @@
             "category_id": "3"
         }
     ],
-    "Orders": [
-        {
-            "recipientName": "John Doe",
-            "phoneNumber": "1234567890",
-            "address": "123 Main St, New York, NY",
-            "note": "Leave at the front door."
-        },
-        {
-            "recipientName": "Jane Smith",
-            "phoneNumber": "0987654321",
-            "address": "456 Elm St, Los Angeles, CA",
-            "note": ""
-        },
-        {
-            "recipientName": "Alice Johnson",
-            "phoneNumber": "1122334455",
-            "address": "789 Oak St, Chicago, IL",
-            "note": "Please deliver in the evening."
-        }
-    ]
+    "Orders": [],
+    "Shipping": []
 }

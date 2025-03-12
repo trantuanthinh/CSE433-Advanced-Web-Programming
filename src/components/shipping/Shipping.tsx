@@ -27,7 +27,7 @@ export default function Shipping() {
 
     const getOrders = async () => {
         try {
-            const response = await axios.get(`${import.meta.env.VITE_APP_API_URL}/Orders`);
+            const response = await axios.get(`${import.meta.env.VITE_APP_API_URL}/Shipping`);
             setOrders(response.data);
         } catch (error) {
             console.error("Error fetching orders:", error);
@@ -36,9 +36,9 @@ export default function Shipping() {
 
     const onSubmit = async (data: Omit<OrderType, "id">) => {
         try {
-            const res = await axios.post(`${import.meta.env.VITE_APP_API_URL}/Orders`, data);
+            const res = await axios.post(`${import.meta.env.VITE_APP_API_URL}/Shipping`, data);
             if (res.status === 201) {
-                toast.success("Order placed successfully!");
+                toast.success("Shipping placed successfully!");
                 await getOrders();
                 reset();
             }
@@ -95,6 +95,7 @@ export default function Shipping() {
                 </button>
             </form>
 
+            {/* Display order details */}
             {orders.length > 0 && (
                 <div className="mt-6 p-4 bg-gray-100 rounded">
                     <h2 className="text-lg font-semibold">Order Summary</h2>
