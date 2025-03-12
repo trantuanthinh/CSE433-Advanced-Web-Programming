@@ -1,8 +1,9 @@
 import React from "react";
 import {createBrowserRouter, Navigate, RouterProvider} from "react-router-dom";
 import {ContextProvider, useMyContext} from "./Context";
-import AGGrid from "./components/AGGrid";
 import MUIDataGrid from "./components/MUIDataGrid";
+import CategoryManagement from "./components/admin/CategoryManagement";
+import ProductManagement from "./components/admin/ProductManagement";
 import Cart from "./components/cart/Cart";
 import Dashboard from "./components/dashboard/Dashboard";
 import Layout from "./components/layouts/Layout";
@@ -46,8 +47,8 @@ const router = createBrowserRouter([
         path: "admin",
         element: <AdminRoute element={<Dashboard />} />,
         children: [
-            {path: "categories", element: <MUIDataGrid />},
-            {path: "products", element: <AGGrid />},
+            {path: "categories", element: <CategoryManagement />},
+            {path: "products", element: <ProductManagement />},
         ],
     },
 ]);
