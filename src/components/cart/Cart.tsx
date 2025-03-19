@@ -14,7 +14,7 @@ export default function Cart() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const data = await axios.get(`${import.meta.env.VITE_APP_API_URL}/Porudcts`);
+                const data = await axios.get(`${import.meta.env.VITE_APP_API_URL}/Products`);
                 setProducts(data.data);
             } catch (error) {
                 console.error("Failed to fetch products:", error);
@@ -25,19 +25,36 @@ export default function Cart() {
 
     const handleOrder = async () => {
         try {
-            let data = state.cart;
-            const responses = await Promise.all(
-                data.map(async (item) => {
-                    let response = await axios.post(`${import.meta.env.VITE_APP_API_URL}/Orders`, item);
-                    return response.status;
-                })
-            );
-            if (responses.every(status => status == 201)) {
+            let dataJson = {
+                userId: state.user?.id,
+                username: state.user?.name,
+                email: state.user?.email,
+                details: state.cart,
+                status: "Pending",
+                totalPrice: total
+            };
+            console.log(dataJson);
+            const response = await axios.post(`${import.meta.env.VITE_APP_API_URL}/Orders`, dataJson);
+            if (response.status == 201) {
                 toast.success("Done");
                 dispatch({type: "CLEAR_CART"});
-            } else {
-                toast.error("Fail");
             }
+
+            // new ways for post many request and check status every response -- to learn --
+            // const responses = await Promise.all(
+            //     data.map(async (item) => {
+            //         let response = await axios.post(`${import.meta.env.VITE_APP_API_URL}/Orders`, item);
+            //         return response.status;
+            //     })
+            // );
+            // if (responses.every(status => status == 201)) {
+            //     toast.success("Done");
+            //     dispatch({type: "CLEAR_CART"});
+            // } else {
+            //     toast.error("Fail");
+            // }
+            // new ways for post many request and check status every response -- to learn --
+
         } catch (error) {
             console.log(error);
         }
@@ -93,16 +110,18 @@ export default function Cart() {
                                 </div>
                             ))}
                             <h3 className="font-bold mt-2">Total: {formatUSCurrency(total)}</h3>
-                            <button
-                                className="bg-red-600 hover:bg-red-800 text-white px-3 py-1 rounded mt-2"
-                                onClick={() => dispatch({type: "CLEAR_CART"})}>
-                                Clear Cart
-                            </button>
-                            <button
-                                className="bg-red-600 hover:bg-red-800 text-white px-3 py-1 rounded mt-2"
-                                onClick={handleOrder}>
-                                Order
-                            </button>
+                            <div className="flex flex-row gap-4">
+                                <button
+                                    className="bg-red-600 hover:bg-red-800 text-white px-3 py-1 rounded mt-2"
+                                    onClick={() => dispatch({type: "CLEAR_CART"})}>
+                                    Clear Cart
+                                </button>
+                                <button
+                                    className="bg-red-600 hover:bg-red-800 text-white px-3 py-1 rounded mt-2"
+                                    onClick={handleOrder}>
+                                    Order
+                                </button>
+                            </div>
                         </>
                     )}
                 </div>

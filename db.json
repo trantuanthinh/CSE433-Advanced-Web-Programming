@@ -79,6 +79,37 @@
             "category_id": "3"
         }
     ],
-    "Orders": [],
+    "Orders": [
+        {
+            "id": "e472",
+            "userId": "1",
+            "username": "Admin User",
+            "email": "admin@gmail.com",
+            "details": [
+                {
+                    "id": "3",
+                    "name": "Hoa Ly Hồng",
+                    "price": 20,
+                    "discount": 0,
+                    "image": "https://example.com/images/pink_lily.jpg",
+                    "code": "HL001",
+                    "category_id": "2",
+                    "quantity": 2
+                },
+                {
+                    "id": "2",
+                    "name": "Hoa Hồng Trắng",
+                    "price": 17.5,
+                    "discount": 5,
+                    "image": "https://example.com/images/white_rose.jpg",
+                    "code": "HH002",
+                    "category_id": "1",
+                    "quantity": 1
+                }
+            ],
+            "status": "Pending",
+            "totalPrice": 57.5
+        }
+    ],
     "Shipping": []
 }

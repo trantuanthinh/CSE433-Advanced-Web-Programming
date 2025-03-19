@@ -4,6 +4,7 @@ import {IoMdTrash} from "react-icons/io";
 import {toast, ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {ProductType} from "../../types/ProductType";
+import DataTable from "../shared/DataTable";
 
 export default function ProductList() {
     const [products, setProducts] = useState<ProductType[]>([]);
@@ -39,6 +40,24 @@ export default function ProductList() {
     return (
         <div className="p-4 bg-white rounded shadow">
             <h2 className="text-lg font-semibold mb-4">Products</h2>
+            <p>aaaaaaaaaaa</p>
+            <DataTable columns={[
+                {field: 'id', headerName: '#', width: 50},
+                {field: 'name', headerName: 'Name', width: 200},
+                {
+                    field: 'actions',
+                    headerName: 'Actions',
+                    width: 100,
+                    renderCell: (params) => (
+                        <div className="flex items-center gap-2">
+                            <button onClick={() => handleDelete(params.row.id)} className="text-red-500 hover:underline">
+                                <IoMdTrash size={20} />
+                            </button>
+                        </div>
+                    ),
+                },
+            ]} products={products} />
+            <p>aaaaaaaaaaa</p>
             <table className="table-auto w-full text-left border-collapse">
                 <thead>
                     <tr className="border-b bg-gray-100">

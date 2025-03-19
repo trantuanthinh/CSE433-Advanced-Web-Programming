@@ -72,6 +72,7 @@ export default function MUIDataGrid() {
                 <DataGrid
                     rows={products}
                     columns={columns}
+                    getRowId={(row) => row.id}
                     initialState={{
                         pagination: {
                             paginationModel: {

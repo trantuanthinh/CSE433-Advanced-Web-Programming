@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import {IoMdCreate, IoMdTrash} from "react-icons/io";
 import {toast, ToastContainer} from "react-toastify";
 import {CategoryType} from "../../types/CategoryType";
+import DataTable from "../shared/DataTable";
 import EditCategory from "./EditCategory";
 
 export default function CategoryList() {
@@ -44,6 +45,27 @@ export default function CategoryList() {
     return (
         <div className="p-4 bg-white rounded shadow">
             <h2 className="text-lg font-semibold mb-4">Categories</h2>
+            <p>aaaaaaaaaaa</p>
+            <DataTable columns={[
+                {field: 'id', headerName: '#', width: 50},
+                {field: 'name', headerName: 'Name', width: 200},
+                {
+                    field: 'actions',
+                    headerName: 'Actions',
+                    width: 100,
+                    renderCell: (params) => (
+                        <div className="flex items-center gap-2">
+                            <button onClick={() => handleEdit(params.row.id)} className="text-blue-500 hover:underline">
+                                <IoMdCreate size={20} />
+                            </button>
+                            <button onClick={() => handleDelete(params.row.id)} className="text-red-500 hover:underline">
+                                <IoMdTrash size={20} />
+                            </button>
+                        </div>
+                    ),
+                },
+            ]} products={categories} />
+            <p>aaaaaaaaaaa</p>
             <table className="table-auto w-full text-left">
                 <thead>
                     <tr className="border-b">
